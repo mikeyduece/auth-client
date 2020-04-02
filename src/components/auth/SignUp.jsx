@@ -1,13 +1,20 @@
 // Dependencies
-import React from 'react'
+import React           from 'react'
 import {
   reduxForm,
   Field
-}            from 'redux-form'
+}                      from 'redux-form'
+import { useDispatch } from 'react-redux'
+import { signup }      from '../../actions'
 
-const SignUp = () => {
+const SignUp = props => {
+  const { handleSubmit } = props
+  const dispatch = useDispatch()
+  const onSubmit = formProps => dispatch(signup(formProps))
+
+
   return (
-    <form>
+    <form onSubmit={ handleSubmit(onSubmit) }>
       <fieldset>
         <label>Email</label>
         <Field
@@ -27,6 +34,7 @@ const SignUp = () => {
           autoComplete='none'
         />
       </fieldset>
+      <button>Sign Up!</button>
     </form>
   )
 }
